@@ -15,6 +15,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.0/trix.css">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -73,8 +74,28 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+           
+           <div class="container">
+                <div class="row">
+               <div class="col-md-4">
+            <ul class="list-group">
+            <li class="list-group-item"><a href="{{route('admin-page.create')}}">Post</a></li>
+            </ul>
+        </div>
+
+           <div class="col-md-8">
+               @yield('content')
+
+            </div>
+        </div>
+        </div>
         </main>
+
+        
+       
+
     </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.0/trix.js"></script>
+
 </body>
 </html>
