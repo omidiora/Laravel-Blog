@@ -5,7 +5,7 @@
  
         
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header">Create Post </div>
 
                 <div class="card-body" >
                 <form method="POST" action="{{route('admin-page.store')}}" enctype="multipart/form-data">

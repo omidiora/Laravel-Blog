@@ -74,12 +74,19 @@
         </nav>
 
         <main class="py-4">
+            @if(resource_path('/category'))
+            {{"eiojkodjiahikoljkdjihdi"}}
+
+
+            
+            @endif
            
            <div class="container">
                 <div class="row">
                <div class="col-md-4">
             <ul class="list-group">
             <li class="list-group-item"><a href="{{route('admin-page.create')}}">Post</a></li>
+            <li class="list-group-item"><a href="{{route('admin-category.create')}}">Category</a></li>
             </ul>
         </div>
 
