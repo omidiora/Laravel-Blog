@@ -74,8 +74,7 @@
         </nav>
 
         <main class="py-4">
-            @if(resource_path('/category'))
-            {{"eiojkodjiahikoljkdjihdi"}}
+            
 
 
             
