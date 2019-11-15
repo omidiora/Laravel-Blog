@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Middleware\VerifyCategoryCount;
 
 use Illuminate\Http\Request;
-use App\post;
+use App\Post;
 use App\Category;
 
 class PostController extends Controller
@@ -86,6 +86,9 @@ class PostController extends Controller
     public function show($id)
     {
         //
+        $post=post::find($id);
+        
+        return view('admin.show')->with('posts',$post)->with('categories',category::all());;
     }
 
     /**
@@ -98,6 +101,7 @@ class PostController extends Controller
     {
         //
         $post=post::find($id);
+      
         
         return view('admin.edit')->with('posts',$post)->with('categories',category::all());
     }

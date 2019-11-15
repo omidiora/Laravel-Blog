@@ -34,7 +34,7 @@
                         </div>
 
                     @if($posts)
-                    <img src="{{asset("storage/$posts->image")}}" alt="vnajdnkvailnj" style="width:130px;"> 
+                    <img src="{{asset("storage/$posts->image")}}" alt="image" style="width:130px;"> 
 
                     @endif
 
