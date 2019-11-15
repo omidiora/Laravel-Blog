@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Middleware\VerifyCategoryCount;
 
 use Illuminate\Http\Request;
 use App\post;
+use App\Category;
 
 class PostController extends Controller
 {
@@ -13,10 +16,21 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function __construct(){
+         $this->middleware('VerifyCategoryCount')->only(['create','store']);
+     }
+
+
+
+
+
+
+
     public function index()
     {
         //
-        return view('admin.index')->with('posts',Post::all());
+        return view('admin.index')->with('posts',Post::all())->with('categories',category::all());
     }
 
     /**
@@ -27,7 +41,7 @@ class PostController extends Controller
     public function create()
     {
         //
-        return view('admin.create');
+        return view('admin.create')->with('posts',Post::all())->with('categories',category::all());
       
     }
 
@@ -45,6 +59,7 @@ class PostController extends Controller
             'content'=>'required',
             'slug'=>'required|unique:posts',
             'image'=>'required',
+            'category_id'=>'required',
            
          ]);
 
@@ -54,9 +69,10 @@ class PostController extends Controller
          $post->title=$request->title;
          $post->slug=Str::slug($request->title);
          $post->content=$request->content;
+         $post->category_id=$request->category_id;
          $post->image= $image;
          $post->save();
-         return redirect('/');
+         return view('admin.index')->with('posts',Post::all())->with('categories',category::all());
 
          
     }
@@ -81,6 +97,9 @@ class PostController extends Controller
     public function edit($id)
     {
         //
+        $post=post::find($id);
+        
+        return view('admin.edit')->with('posts',$post)->with('categories',category::all());
     }
 
     /**
@@ -93,8 +112,29 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         //
-    }
+        
+         $this->validate($request,[
+            'title'=>'required',
+            'content'=>'required',
+            'slug'=>'required',
+            'image'=>'required',
+            'category_id'=>'required',
+           
+         ]);
 
+         
+         $image=$request->image->store('posts');
+         $post=post::find($id);
+         $post->title=$request->title;
+         $post->slug=Str::slug($request->title);
+         $post->content=$request->content;
+         $post->category_id=$request->category_id;
+         $post->image= $image;
+         $post->save();
+         return view('admin.index')->with('posts',Post::all())->with('categories',category::all());
+
+         
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -104,5 +144,10 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+        $post=post::find($id);
+      
+       $post->delete();
+       return redirect('/');
+
     }
 }

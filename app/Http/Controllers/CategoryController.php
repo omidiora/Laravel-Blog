@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\category;
+use session;
 class CategoryController extends Controller
 {
     /**
@@ -46,7 +47,8 @@ class CategoryController extends Controller
         $category=new category;
         $category->category=$request->category;
         $category->save();
-        return redirect('/');
+        session()->flash('success','Category added Successfully');
+        return redirect()->back();
 
     }
 
@@ -86,6 +88,8 @@ class CategoryController extends Controller
     {
         $category=category::find($id);
         $category->category=$request->category;
+        $category->save();
+        session()->flash('success','Category Updated Successfully');
         return view('admin.category.index')->with('categories',category::all());
      
        
@@ -101,9 +105,16 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         //
+          $category=category::find($id);
+        if($category->post->count()>0){
+
+            session()->flash('success','Category Cannot be deleted because it is attached to posts');
+            return redirect()->back();
+        }
         
-        $category=category::find($id);
+      
         $category->delete();
+        session()->flash('success','Category Deleted Successfully');
         return view('admin.category.create')->with('categories',$category);
 
         

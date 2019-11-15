@@ -10,7 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+   
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -74,22 +74,43 @@
         </nav>
 
         <main class="py-4">
-            
-
-
-            
-            @endif
            
+            @if(session()->has('success'))
+
+            <p class="alert alert-primary">{{session('success')}}</p>
+
+            @endif
+        
            <div class="container">
                 <div class="row">
                <div class="col-md-4">
             <ul class="list-group">
-            <li class="list-group-item"><a href="{{route('admin-page.create')}}">Post</a></li>
-            <li class="list-group-item"><a href="{{route('admin-category.create')}}">Category</a></li>
+                    
+            <li class="list-group-item"><a href="{{route('admin-page.index')}}">Post</a></li>
+            <li class="list-group-item"><a href="{{route('admin-category.index')}}">Category</a></li>
             </ul>
         </div>
 
-           <div class="col-md-8">
+           <div class="col-md-8 ">
+                <li class="d-flex justify-content-xl-end ">
+                @if (in_array(request()->path(),['admin-page/create',  "admin-category/create","login" , 'admin-page/{admin_page}/edit' ]))
+
+                
+                @else
+                <a href="{{route('admin-page.create')}}" class="btn btn-primary ml-5">Add Post</a>
+                <div>
+                        <a href="{{route('admin-category.create')}}" class="btn btn-primary ml-5">Add Category</a>
+
+                </div>
+
+               
+                    
+                @endif
+                  
+                    
+           
+                      
+                      </li>
                @yield('content')
 
             </div>
@@ -101,6 +122,7 @@
        
 
     </div>
+    <script src="{{ asset('js/app.js') }}" ></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.0/trix.js"></script>
 
 </body>

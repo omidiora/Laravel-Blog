@@ -21,13 +21,17 @@
                         {{$post->title}}
                  </td>
                  <td>
-            
-            </a>
+                 <a href="{{route('admin-category.edit',$post->category->id)}}">{{$post->category->category}}</a>
+           
                  </td>
                  <td>
+                 <a href="{{route('admin-page.edit',$post->id)}}" class="btn btn-info">Edit</a>
        
     
                                 
+                 </td>
+                 <td>
+                        <a href="{{route('admin-page.destroy',$post->id)}}" class="btn btn-danger">Delete</a>
                  </td>
                 </tr>
                     

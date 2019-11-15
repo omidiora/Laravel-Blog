@@ -20,17 +20,24 @@
               @endif
 
                 <div class="card-body" >
-                <form method="POST" action="{{route('admin-page.store')}}" enctype="multipart/form-data">
+                <form method="POST" action="{{route("admin-page.update", $posts->id)}}" enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
                         <div class="form-group">
                         <label for="title" >{{ __('Title') }}</label>
-                         <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" required  autofocus>
+                         <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ $posts->title }}" required  autofocus>
                         </div>
 
                         <div class="form-group">
                             <label for="slug" >{{ __('Slug') }}</label>
-            <input id="slug" type="slug" class="form-control @error('slug') is-invalid @enderror" name="slug" value="{{ old('slug') }}" required autocomplete="email">
+            <input id="slug" type="slug" class="form-control @error('slug') is-invalid @enderror" name="slug" value="{{ $posts->slug }}" required autocomplete="email">
                         </div>
+
+                    @if($posts)
+                    <img src="{{asset("storage/$posts->image")}}" alt="vnajdnkvailnj" style="width:130px;"> 
+
+                    @endif
+
 
                         <div class="form-group">
                             <label for="image" >{{ __('image') }}</label>
@@ -41,8 +48,14 @@
                         <div class="form-group">
                                 <label for="categpry" >{{ __('category') }}</label>
                                <select name="category_id" id="" class="form-control">
-                                   @foreach ($categories as $category)
-                               <option value="{{$category->id}}">{{$category->category}}</option>
+                                   @foreach ($categories as $categories)
+                               <option value="{{$categories->id}}"
+                                @if ($categories->id==$posts->category_id )
+                                    selected
+                                @endif
+                                
+                                
+                                >{{$categories->category}}</option>
                                 @endforeach
                                </select>
                             </div>
@@ -50,13 +63,13 @@
 
                         <div class="form-group">
                             <label for="">Content</label>
-                           <input id="content"  type="hidden" name="content" cols="90">
+                           <input id="content"  type="hidden" name="content" value="{{$posts->content}}">
                             <trix-editor input="content" ></trix-editor>
                            </div>
 
                         <div class="form-group">
                              <button type="submit" class="btn btn-primary">
-                             {{ __('Add Post') }}
+                             {{ __('Update Post') }}
                                 </button>
                             </div>
                         </div>

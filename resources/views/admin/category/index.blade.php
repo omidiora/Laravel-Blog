@@ -21,7 +21,7 @@
                        
                     </td>
                     <td>
-                    0
+                  {{$category->post->count()}}
                      
                  </td>
                  <td>
