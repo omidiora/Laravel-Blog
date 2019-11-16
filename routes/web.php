@@ -12,12 +12,16 @@
 */
 
 Route::get('/', 'WelcomeController@index');
+Route::get('/search', 'WelcomeController@search')->name('search');
   
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('admin-page', 'PostController');
+Route::resource('admin-page', 'PostController',['except'=>['show']]);
+Route::get('/admin-page/{slug}', 'PostController@show')->name('show');
+//Route::get('/threads/{thread}/{slug}', 'ThreadController@show')->name('threads.show');
+
 Route::resource('admin-category', 'CategoryController');
 
 

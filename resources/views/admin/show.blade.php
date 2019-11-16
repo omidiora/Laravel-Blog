@@ -51,10 +51,9 @@
       </div>
     </div>
   </nav>
-
+    
   <!-- Page Header -->
- 
-  <header class="masthead" style="color:black !important;background-image: url('{{asset("storage/$posts->image")}}');>
+  <header class="masthead" style="color:black !important;background-image: url('{{asset("storage/$post->image")}}');>
  
     
 
@@ -63,7 +62,7 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="post-heading">
-          <h1 style="color:black !important;">{{$posts->title}}</h1>
+          <h1 style="color:black !important;">{{$post->title}}</h1>
             <h2 class="subheading"  style="color:black !important;"><strong> Problems look mighty small from 150 miles up</strong></h2>
             <span class="meta">Posted by
               <a href="#">Start Bootstrap</a>

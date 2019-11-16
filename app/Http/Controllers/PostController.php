@@ -83,12 +83,15 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show( Post $post,$id)
     {
-        //
+
+    
+       
         $post=post::find($id);
+      
         
-        return view('admin.show')->with('posts',$post)->with('categories',category::all());;
+        return view('admin.show')->with('post',$post)->with('categories',category::all());;
     }
 
     /**

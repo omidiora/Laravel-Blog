@@ -161,7 +161,7 @@
 										<div class="card-body">
 										<h5 class="card-title"> <strong>{{$post->title}}</strong> </h5>
 										  <p class="card-text" s></p>
-										<a href="{{route('admin-page.show',$post->id)}}" class="btn btn-primary">Read More</a>
+										<a href="{{route('show',[$post->id,$post->slug])}}" class="btn btn-primary">Read More</a>
 										</div>
 										
 						</section>
@@ -218,7 +218,9 @@
 							<section>
 								<header>
 									<h2>Gravida praesent</h2>
-									<span class="byline">Praesent lacus congue rutrum</span>
+								<form action="{{route('search')}}" method="get">
+									<span class="byline"><input type="search" name="search" id=""></span>
+								</form>
 								</header>
 								<p>Donec leo, vivamus fermentum nibh in augue praesent a lacus at urna congue rutrum. Maecenas luctus lectus at sapien. Consectetuer adipiscing elit.</p>
 								<ul class="default">

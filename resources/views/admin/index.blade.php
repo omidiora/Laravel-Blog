@@ -13,7 +13,7 @@
                 @foreach ($posts as $post)
                 <tr>
                     <td>
-  <img src="{{asset("storage/$post->image")}}" alt="vnajdnkvailnj" style="width:130px;"> 
+  <img src="{{asset("storage/$post->image")}}" alt="image" style="width:130px;"> 
                     
                        
                     </td>
